@@ -1,0 +1,37 @@
+create database historico
+
+use historico
+
+create table tarefas(
+idTarefa int primary key identity (1,1),
+descricao varchar (50) not null,
+situacao varchar (50) not null 
+)
+
+insert into tarefas(descricao,situacao)
+values('Lavar o banheiro','Não iniciado')
+
+create table historicoStatus(
+idHistorico int primary key identity(1,1),
+idTarefas int not null,
+novoStatus varchar(50) not null,
+dataAlteracao datetime not null,
+)
+create Trigger NoticarStatus
+on historicoStatus for insert
+as 
+begin
+declare 
+@idTarefas int,
+@novoStatus varchar (50),
+@dataAlteracao datetime
+select @idTarefas=idTarefas, @novoStatus=novoStatus, @dataAlteracao=dataAlteracao from inserted
+update tarefas set situacao=@novoStatus
+where idTarefa=@idTarefas
+end
+
+insert into historicoStatus(idTarefas,dataAlteracao,novoStatus)
+values(3,getdate(),'Ainda não iniciada')
+
+select*from historicoStatus
+select*from tarefas

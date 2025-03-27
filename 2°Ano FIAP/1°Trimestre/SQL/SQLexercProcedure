@@ -1,0 +1,56 @@
+create database jogo
+
+use jogo
+
+create table personagens(
+idPersonagem int primary key identity(1,1),
+nome varchar (50) not null,
+tipoPersonagem varchar (50) not null
+)
+
+create table itens(
+idItem int primary key identity(1,1),
+nomeItem varchar (50) not null,
+dano int not null
+)
+
+create table personagemItem(
+id int primary key identity(1,1),
+idPersonagem int not null,
+idItem int not null,
+constraint fk_personagens_personagemItem
+foreign key (idPersonagem) references personagens(idPersonagem),
+constraint fk_itens_personagemItem
+foreign key (idItem) references itens(idItem)
+)
+
+create procedure inserirPersonagem
+@nome varchar (50),
+@tipoPersonagem varchar (50)
+as
+insert into personagens (nome,tipoPersonagem)
+values (@nome,@tipoPersonagem)
+
+create procedure inserirItem
+@nomeItem varchar(50),
+@dano int
+as
+insert into itens(nomeItem,dano)
+values (@nomeItem,@dano)
+
+create procedure inserirPersonagemItem
+@idPersonagem int,
+@idItem int
+as
+insert into personagemItem(idPersonagem,idItem)
+values (@idPersonagem,@idItem)
+
+exec inserirPersonagem '',''
+select*from personagens
+
+exec inserirItem '',
+select*from itens
+
+exec inserirPersonagemItem 
+select*from personagemItem
+
