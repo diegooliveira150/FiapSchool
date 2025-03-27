@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    text-align: center;
+    background-color: #1ed760;
+}
+
+header img{
+    width: 80px;
+    
+}
+
+nav{
+    /*alinhar*/
+    display: flex;
+    /*espaço*/
+    justify-content: space-around;
+    /* tamanho espaçamento*/
+    padding: 10px;
+}
+
+a{
+    /*tira o risco do link*/
+    text-decoration: none;
+    /*cor letras*/
+    color: white;
+    font-size: 1.0rem;
+}
+
+button{
+    /*tirar borda*/
+    border: 0px;
+    background-color: transparent;
+    transition: all 0.1s linear;
+}
+
+button:hover{
+    transform: scale(1.1);
+}
+
+img{
+    margin:0;
+}
