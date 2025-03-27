@@ -1,0 +1,109 @@
+create database carrosMultas
+ 
+use carrosMultas
+create table carros(
+carroid int primary key identity(1,1),
+placa char (7) not null,
+modelo varchar (50) not null,
+ano int not null
+)
+ 
+create table motoristas(
+motoristaid int primary key identity(1,1),
+nome varchar (50) not null,
+cnh int not null,
+pontosCnh int not null
+)
+ 
+create table multas(
+multaid int primary key identity(1,1),
+carrosid int not null,
+dataMulta date not null,
+pontos int not null,
+constraint fk_multas_carros foreign key (carrosId)
+references carros(carroid)
+)
+ 
+create table prontuarios(
+prontuarioid int primary key identity(1,1),
+motoristasid int not null,
+multasid int not null,
+dataAssociacao datetime not null,
+constraint fk_prontuarios_motoristas foreign key (motoristasid)
+references motoristas(motoristaid),
+constraint fk_prontuarios_multas foreign key (multasid)
+references multas(multaid)
+)
+ 
+create procedure adicionarCarro
+@placa char(7),
+@modelo varchar(50),
+@ano int
+as
+insert into carros (placa,modelo,ano)
+values (@placa,@modelo,@ano)
+create procedure adicionarMotorista
+@nome varchar(50),
+@cnh int,
+@pontosCnh int
+as 
+insert into motoristas(nome, cnh, pontosCnh)
+values (@nome, @cnh, @pontosCnh)
+ 
+create procedure adicionarMultas
+@carrosid int,
+@dataMulta date,
+@pontos int
+as
+insert into multas(carrosid,dataMulta,pontos)
+values (@carrosid, @dataMulta, @pontos)
+ 
+create Trigger Prontuariotg
+on multas for insert
+as 
+begin
+insert into prontuarios(motoristasid,multasid, dataAssociacao)
+select carrosid, multaid, getdate() from inserted
+end
+create Trigger multaProntuario
+on multas for insert
+as
+begin
+declare
+@carrosid int,
+@pontos int 
+select @carrosId=carrosid, @pontos=pontos from inserted
+update motoristas set pontosCnh=pontosCnh+@pontos
+where motoristaid=@carrosid
+end
+exec adicionarCarro '123abcd','Toyota Corolla', 2023
+exec adicionarCarro '345abcd','Toyota yaris',2024
+exec adicionarCarro '678abcd','Bmw I8',2025
+exec adicionarCarro '789abcd','Fiat pulse',2021
+ 
+exec adicionarMotorista 'Figueiredo', 123456789, 0
+exec adicionarMotorista 'Diego',987654321,0
+exec adicionarMotorista 'Nicolas',012345678,0
+exec adicionarMotorista 'Avoro',234567891,0
+ 
+exec adicionarMultas 2, '28-02-2025', 1 
+exec adicionarMultas 2, '23-06-2023', 2
+exec adicionarMultas 1,'15-04-2021',2
+exec adicionarMultas 4,'05-02-2021',3
+ 
+select*from carros
+select*from motoristas 
+select*from multas
+select*from prontuarios
+ 
+select m.motoristaid,m.nome,m.pontosCnh,mu.multaid,mu.pontos
+from prontuarios p inner join motoristas m on p.motoristasid = m.motoristaid
+inner join multas mu on p.multasid= mu.multaid
+ 
+select m.motoristaid,m.nome,m.pontosCnh,mu.multaid,mu.pontos
+from prontuarios p inner join motoristas m on p.motoristasid = m.motoristaid
+inner join multas mu on p.multasid= mu.multaid
+where motoristaid = 2
+ 
+select m.motoristaid, m.nome,m.cnh, m.pontosCnh
+from prontuarios p inner join motoristas m on p.motoristasid = m.motoristaid
