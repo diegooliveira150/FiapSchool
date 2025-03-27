@@ -1,0 +1,97 @@
+create database loja
+use loja
+create table peças(
+idPeça int primary key identity (1,1),
+gabinete varchar (60),
+memoria varchar(60),
+processador varchar (60),
+PlacaDeVideo varchar (60),
+fonte varchar (60),
+)
+create table clientes(
+idClientes int primary key identity (1,1),
+nome varchar (60) not null,
+telefone char(9),
+)
+create table computador(
+idComputador int primary key identity (1,1),
+nomeComputador varchar (40) not null,
+peça int not null,
+cliente int not null,
+constraint fk_computador_peças foreign key(peça)
+references peças (idPeça),
+constraint fk_computador_clientes foreign key(cliente)
+references clientes(idClientes)
+)
+ 
+insert into peças(gabinete,memoria,processador,PlacaDeVideo,fonte)
+values ('gabinete diego','16gb','i7','4060','400w')
+ 
+insert into peças(gabinete,memoria,processador,PlacaDeVideo,fonte)
+values ('gabinete nicolas','32gb','i9','5080','500w')
+ 
+insert into peças(gabinete,memoria,processador,PlacaDeVideo,fonte)
+values ('gabinete joão pedro','24gb','i5','4090','400w')
+ 
+insert into peças(gabinete,memoria,processador,PlacaDeVideo,fonte)
+values ('gabinete laura','32gb','i7','5080','650w')
+ 
+insert into peças(gabinete,memoria,processador,PlacaDeVideo,fonte)
+values ('gabinete felipe','8gb','i5','3050','200w')
+ 
+select*from peças
+insert into clientes(nome,telefone)
+values ('Diego','119778800')
+ 
+  insert into clientes(nome,telefone)
+  values ('Nicolas','119556600')
+ 
+  insert into clientes(nome,telefone)
+  values ('João Pedro','119223300')
+ 
+  insert into clientes(nome,telefone)
+  values ('Laura','119112200')
+ 
+  insert into clientes(nome,telefone)
+  values ('Felipe','119557700')
+ 
+  select*from clientes
+ 
+  insert into computador(cliente,peça,nomeComputador)
+  values(1,1,'computador diego')
+ 
+  insert into computador(cliente,peça,nomeComputador)
+  values(2,2,'computador nicolas')
+ 
+  insert into computador(cliente,peça,nomeComputador)
+  values(3,3,'computador joão pedro')
+ 
+  insert into computador(cliente,peça,nomeComputador)
+  values(4,4,'computador laura')
+ 
+  insert into computador(cliente,peça,nomeComputador)
+  values(5,5,'computador felipe')
+ 
+  select c.nomeComputador,cl.idClientes,cl.nome,p.gabinete,p.memoria,p.processador,p.PlacaDeVideo,p.fonte
+  from computador c inner join clientes cl on c.cliente = cl.idClientes
+  inner join peças p on c.peça = p.idPeça
+ 
+  select c.nomeComputador,cl.idClientes,cl.nome,p.gabinete,p.memoria,p.processador,p.PlacaDeVideo,p.fonte
+  from computador c inner join clientes cl on c.cliente = cl.idClientes
+  inner join peças p on c.peça = p.idPeça
+  where cl.nome = 'Diego'
+ 
+  select c.idComputador,c.nomeComputador,p.gabinete,p.memoria,p.processador,p.PlacaDeVideo,p.fonte
+  from computador c inner join clientes cl on c.cliente = cl.idClientes
+  inner join peças p on c.peça = p.idPeça
+  where p.PlacaDeVideo = '5080'
+ 
+  select c.idComputador,cl.nome,c.nomeComputador
+  from computador c inner join clientes cl on c.cliente = cl.idClientes
+  inner join peças p on c.peça = p.idPeça
+  where c.nomeComputador = 'computador nicolas'
+ 
+  select cl.idClientes,cl.nome,c.nomeComputador,p.gabinete,p.memoria,p.processador,p.PlacaDeVideo,p.fonte
+  from computador c inner join clientes cl on c.cliente = cl.idClientes
+  inner join peças p on c.peça = p.idPeça
+  where p.PlacaDeVideo = '5080'

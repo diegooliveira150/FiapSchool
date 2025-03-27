@@ -1,0 +1,37 @@
+[
+    {
+        "pedido":"Camisa Palmeiras Puma I 25/26 Jogador, Tamanho M.",
+        "valor":"490,00",
+        "idCliente":"1",
+        "nomeCliente":"Diego Oliveira Camargo"       
+    },
+
+    {
+        "pedido":"Camisa Palmeiras Puma II 25/26 Jogador, Tamanho M.",
+        "valor":"490,00",
+        "idCliente":"2",
+        "nome":"Julia Floriano Vernili"
+    },
+
+    {
+        "pedido":"Camisa Palmeiras Puma I Goleiro 25/26 Jogador, Tamanho P.",
+        "valor":"390,00",
+        "idCliente":"3",
+        "nome":"Lorena Oliveira Camargo"
+    },
+
+    {
+        "pedido":"Camisa Goleiro II Palmeiras Puma 24/25 Jogador, Tamanho G.",
+        "valor":"390,00",
+        "idCliente":"4",
+        "nome":"Elaine Oliveira Camargo"        
+    },
+
+    {
+        "pedido":"Camisa Palmeiras Puma III 24/25 Jogador, Tamanho M.",
+        "valor":"490,00",
+        "idCliente":"5",
+        "nome":"Alexandre de Camargo Miranda"
+    }
+
+]

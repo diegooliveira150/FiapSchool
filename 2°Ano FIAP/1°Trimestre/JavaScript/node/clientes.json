@@ -1,0 +1,37 @@
+[
+    {
+        "ID":"1",
+        "nome":"Diego Oliveira Camargo",    
+        "idade":"20 anos",
+        "telefone":"11977889900"
+    },
+
+    {
+        "ID":"2",
+        "nome":"Julia Floriano Vernili",
+        "idade":"21 anos",
+        "telefone":"11900112233"
+    },
+
+    {
+        "ID":"3",
+        "nome":"Lorena Oliveira Camargo",
+        "idade":"15 anos",
+        "telefone":"11944556677"
+    },
+
+    {
+        "ID":"4",
+        "nome":"Elaine Oliveira Camargo",
+        "idade":"53 anos",
+        "telefone":"11933445566"
+    },
+
+    {
+        "ID":"5",
+        "nome":"Alexandre de Camargo Miranda",
+        "idade":"55 anos",
+        "telefone":"11922445566"
+    }
+
+]
