@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <footer>
+        <div>
+            <h1>Contatos</h1>
+            <ul>
+                <li>11977110022</li>
+                <li>11900224455</li>
+                <li>11988552244</li>
+            </ul>
+        </div>
+        <div>
+            <h1>Endereço</h1>
+            <ul>
+                <li>Tatuapé-SP</li>
+                <li>Tremenbé-SP</li>
+                <li>Natal-CE</li>
+        </div>
+        <div>
+            <h1>Redes Sociais</h1>
+            <ul>
+                <li >Instagram</li>
+                <li>Facebook</li>
+                <li>Whatsapp</li>
+            </ul>
+        </div>
+    </footer>
+    
+</body>
+</html>
