@@ -1,0 +1,25 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(43, 43, 43);
+}
+
+main{
+    display: block;
+    text-align: center;
+    padding: 250px;
+    color: wheat;
+}
+
+div{
+    padding: 5px;
+    
+}
+
+button:hover{
+    transform:  scale(1.1);
+}
+
+button{
+    transition: 0,1s;
+}
