@@ -1,0 +1,18 @@
+[
+    {
+        "nome": "Camisa Palmeiras",
+        "preço": 300
+    },
+    {
+        "nome": "Camisa São Paulo",
+        "preço": 289
+    },
+    {
+        "nome": "Camisa Corinthians",
+        "preço": 259
+    },
+    {
+        "nome": "Camisa Santos",
+        "preço": 239
+    }
+]
