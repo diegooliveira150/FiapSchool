@@ -1,0 +1,38 @@
+create database transacoesAutomatizadas
+
+use transacoesAutomatizadas
+
+create table produtos(
+id int primary key,
+nome varchar (50),
+estoque float
+)
+
+insert into produtos(id,nome,estoque)
+values(1,'Carne',50)
+insert into produtos(id,nome,estoque)
+values(2,'Frango',100)
+
+create procedure transferenciaEstoque
+@id int,
+@valorTransferencia float
+as
+begin
+begin transaction reducaoEstoque;
+if ((select estoque from produtos where id = @id) >= 
+@valorTransferencia)
+begin 
+update produtos 
+set estoque= estoque-@valorTransferencia
+where id = @id;	
+commit transaction reducaoEstoque;
+print 'Compra realizada com sucesso!';
+end
+else
+begin
+rollback transaction reducaoEstoque;
+print 'Produto fora de estoque.';
+end
+end;
+
+select*from produtos
