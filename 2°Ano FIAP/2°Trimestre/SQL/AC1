@@ -1,0 +1,39 @@
+create database AC1_T2
+
+use AC1_T2
+
+create table alunos(
+id int primary key identity(1,1),
+nome varchar (50) not null,
+matricula varchar (50) not null
+)
+
+insert into alunos(nome, matricula)
+values ('Diego Oliveira','Não matrículado.')
+
+insert into alunos(nome, matricula)
+values ('Julia Floriano','Aluno rematrículado.')
+
+create procedure controleMatricula
+@id int,
+@matricula varchar(50)
+as 
+begin 
+begin transaction TransferirAluno;
+if ((select matricula  from alunos where id = @id) >= 'Não matrículado.')
+begin 
+update alunos 
+set matricula = @matricula
+where id = @id 
+
+commit transaction TransferirAluno;
+print 'O alundo foi rematrículado.';
+end
+else 
+begin	
+rollback transaction TransferirAluno;
+print 'Aluno já foi matrículado.';
+end 
+end;
+
+select*from alunos
