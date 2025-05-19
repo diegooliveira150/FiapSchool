@@ -12,7 +12,7 @@ insert into alunos(nome, matricula)
 values ('Diego Oliveira','Não matrículado.')
 
 insert into alunos(nome, matricula)
-values ('Julia Floriano','Aluno rematrículado.')
+values ('Julia Floriano','Aluno matrículado para 2025.')
 
 create procedure controleMatricula
 @id int,
@@ -27,7 +27,7 @@ set matricula = @matricula
 where id = @id 
 
 commit transaction TransferirAluno;
-print 'O alundo foi rematrículado.';
+print 'O alundo foi matrículado.';
 end
 else 
 begin	
