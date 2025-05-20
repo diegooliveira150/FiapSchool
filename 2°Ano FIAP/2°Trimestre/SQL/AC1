@@ -37,3 +37,48 @@ end
 end;
 
 select*from alunos
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+create database exercicio2
+
+use exercicio2
+
+create table pacientes(
+id int primary key identity(1,1),
+nome varchar (50) not null,
+medicado varchar(50) not null
+)
+
+insert into pacientes(nome,medicado)
+values ('Julia Floriano','Não medicado')
+
+insert into pacientes(nome,medicado)
+values ('Diego Oliveira','Paracetamol')
+
+create procedure controleMedicamento 
+@id int,
+@medicado varchar (50)
+as 
+begin
+begin transaction atualizarMedicamento;
+if ((select medicado from pacientes where id = @id) = 'Não medicado')
+begin 
+update pacientes
+set medicado = @medicado
+where id = @id 
+
+commit transaction atualizarMedicamento;
+print 'Paciente medicado.';
+end 
+
+else 
+begin
+rollback transaction atualizarMedicamento;
+print 'O paciente já foi medicado.';
+end 
+end;
+
+exec controleMedicamento 1,'Paracetamol'
+
+select*from pacientes
