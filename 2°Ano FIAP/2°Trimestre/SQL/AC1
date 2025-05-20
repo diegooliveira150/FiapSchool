@@ -1,6 +1,6 @@
-create database AC1_T2
+create database exercicio1
 
-use AC1_T2
+use exercicio1
 
 create table alunos(
 id int primary key identity(1,1),
