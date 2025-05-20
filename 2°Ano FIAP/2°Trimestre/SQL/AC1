@@ -20,7 +20,7 @@ create procedure controleMatricula
 as 
 begin 
 begin transaction TransferirAluno;
-if ((select matricula  from alunos where id = @id) >= 'Não matrículado.')
+if ((select matricula  from alunos where id = @id) = 'Não matrículado.')
 begin 
 update alunos 
 set matricula = @matricula
@@ -51,7 +51,7 @@ medicado varchar(50) not null
 )
 
 insert into pacientes(nome,medicado)
-values ('Julia Floriano','Não medicado')
+values ('Julia Floriano','Não medicado.')
 
 insert into pacientes(nome,medicado)
 values ('Diego Oliveira','Paracetamol')
@@ -62,7 +62,7 @@ create procedure controleMedicamento
 as 
 begin
 begin transaction atualizarMedicamento;
-if ((select medicado from pacientes where id = @id) = 'Não medicado')
+if ((select medicado from pacientes where id = @id) = 'Não medicado.')
 begin 
 update pacientes
 set medicado = @medicado
@@ -75,7 +75,7 @@ end
 else 
 begin
 rollback transaction atualizarMedicamento;
-print 'O paciente já foi medicado.';
+print 'O paciente já foi medicado antes.';
 end 
 end;
 
