@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "nome": "Fisica",
+    "desc": "Uma biblioteca de Física para auxiliar seus estudos.",
+    "url_info": "https://pt.khanacademy.org/science/physics"
+  },
+  {
+    "id": "2",
+    "nome": "Biologia",
+    "desc": "Uma biblioteca de Biologia para auxiliar seus estudos.",
+    "url_info": "http://pt.khanacademy.org/science/biology?utm_account=Grant&utm_campaignname=&gad_source=1&gclid=Cj0KCQjwv_m-BhC4ARIsAIqNeBunPW2VQ1c4c32VXpG-S8gYg7V8nYpfEXec7ZKDoKNcyggv0yzjU1QaAsoWEALw_wcB"
+  },
+  {
+    "id": "3",
+    "nome": "Quimica",
+    "desc": "Uma biblioteca de Química para auxiliar seus estudos.",
+    "url_info": "https://pt-pt.khanacademy.org/science/chemistry"
+  },
+  {
+    "id": "4",
+    "nome": "Matematica",
+    "desc": "Uma biblioteca de Matematica para auxiliar seus estudos.",
+    "url_info": "https://pt.khanacademy.org/math"
+  }
+]
