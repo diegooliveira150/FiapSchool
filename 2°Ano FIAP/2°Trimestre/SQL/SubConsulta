@@ -32,3 +32,5 @@ where id_cliente in (select id_cliente from pedidos where valor>100);
 
 select nome from clientes c
 where exists (select 1 from pedidos p where p.id_cliente = c.id_cliente and p.valor > 100)
+
+select nome, (select max(valor) from pedidos where id_cliente = c.id_cliente)as maior_pedido from clientes c;
