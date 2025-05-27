@@ -1,0 +1,34 @@
+create database aulaSubConsulta
+
+use aulaSubConsulta
+
+create table clientes (
+id_cliente int primary key,
+nome varchar (100),
+cidade varchar (100)
+)
+
+create table pedidos (
+id_pedidos int primary key,
+id_cliente int,
+valor decimal (10,2),
+data_pedido date,
+foreign key (id_cliente) references clientes(id_cliente)
+)
+
+insert into clientes(id_cliente,nome,cidade) values
+(1,'João', 'São Paulo'),
+(2,'Maria','Rio de Janeiro'),
+(3,'Pedro','Salvador');
+
+insert into pedidos(id_pedidos,id_cliente,valor, data_pedido) values
+(1,1,100.00,'2025-05-01'),
+(2,2,150.00,'2025-05-02'),
+(3,3,200.00,'2025-05-03'),
+(4,1,50.00,'2025-05-04');
+
+select nome from clientes
+where id_cliente in (select id_cliente from pedidos where valor>100);
+
+select nome from clientes c
+where exists (select 1 from pedidos p where p.id_cliente = c.id_cliente and p.valor > 100)
