@@ -14,7 +14,7 @@ function criarCard(carro){
     <img src="${carro.url_foto}" class="card-img-top w-100  h-auto" alt="${carro.nome}">
     <div class="card-body">
     <h5 class="card-title">${carro.nome}</h5>
-    <p class="card-text">${carro.desc}</h5>
+    <p class="card-text">${carro.desc}</p>
     <a href="${carro.url_info}" class="btn btn-primary">Mais informações</a>
     </div>
     </div>
