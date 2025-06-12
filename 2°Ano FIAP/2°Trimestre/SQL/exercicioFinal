@@ -1,0 +1,42 @@
+create database exercicioFinal
+
+use exercicioFinal
+
+create table proprietarios(
+proprietarioID int primary key,
+nome varchar(100) not null,
+telefone varchar(20) not null
+)
+
+create table imoveis(
+imovelID int primary key,
+endereço varchar(150) not null,
+valorAluguel decimal(10,2) not null,
+proprietarioID int not null,
+foreign key proprietarioID references proprietario(proprietarioID)
+)
+
+create table clientes(
+clienteID int primary key,
+nome varchar(100) not null,
+CPF varchar(14) unique not null,
+telefone varchar(20)
+)
+
+create table contratos(
+contratoID int primary key,
+imovelID int not null,
+clienteID int not null,
+dataInicio date not null,
+dataFinal date not null,
+valorMensal decimal(10,2) not null,
+foreign key imovelID references imoveis(imovelID),
+foreign key clienteID references clientes(clienteID)
+)
+
+create table logEncerramentos(
+logID int primary key identity(1,1),
+contratoID int not null,
+dataEncerramento date not null,
+dataRegistro datetime default getdate() not null
+)
