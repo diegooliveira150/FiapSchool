@@ -17,6 +17,7 @@
         <td><h6>${materia.materia}</h6></td>
         <td><h6>${materia.titulo}</h6></td>
         <td><p>${materia.desc}</p></td>
+        </tr>
         `;
     }
 
@@ -127,4 +128,5 @@
 
     app.listen(port, () => {
         console.log(`Servidor rodando em http://localhost:${port}`)
+
     });
