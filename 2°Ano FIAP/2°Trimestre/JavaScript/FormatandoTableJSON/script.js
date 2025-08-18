@@ -26,7 +26,7 @@ app.get('/',(req,res) =>{
         <td><a href="${carro.url_info}">${carro.nome}</a></td>
         <td>${descricaoTruncada}</td>
         <td><img src="${carro.url_foto}" alt="${carro.nome}" style="max-width: 100px"></td>
-        <tr>
+        </tr>
         `;
     });
 
@@ -38,4 +38,5 @@ app.get('/',(req,res) =>{
 
 app.listen(port, () =>{
     console.log(`Servidor iniciado em http://localhost:${port}`);
+
 });
