@@ -51,11 +51,13 @@ app.post('/cadastro',async (req,res) => {
     }
 });
 
+// Rota para exibir o formulário de atualizações
 app.get('/atualizar',async(req,res)=>{
     res.sendFile(__dirname + '/atualizar.html')
 });
 
-app.post('/atualizar',(req,res)=>{
+// Rota para lidar com submissação de formulário de atualização
+app.post('/atualizar',async(req,res)=>{
     const {id, titulo, autor, ano_publicao, genero, editora, paginas, idioma, ISBN, disponivel} = req.body;
     const client = new MongoClient(url);
 
@@ -87,3 +89,87 @@ app.post('/atualizar',(req,res)=>{
     }  
 });
 
+app.get('/livro/:id', async(req,res)=>{
+    const {id} = req.params;
+
+    // Conectar ao MongoDB
+    const client = new MongoClient(url);
+
+    try{
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+
+        // Encotrar o livro pelo ID
+        const livro = await collection.findOne({_id: new ObjectId(id)});
+
+        if(!livro){
+            return res.status(404).send('Livro não encontrado');
+        }
+        res.json(livro);
+    } catch(err){
+        console.error('Erro ao buscar o livro: ',err);
+        res.status(500).send('Erro ao buscar o livro. Por favor, tente novamente mais tarde.');
+    } finally{
+        client.close();
+    }
+});
+
+app.get('/deletar', async(req,res)=>{
+    res.sendFile(__dirname + '/deletar.html')
+});
+
+// Rota para lidar com a submissão do formulário de delação 
+app.post('/deletar', async(req,res) => {
+    const {id} = req.body;
+
+    const client = new MongoClient(url)
+
+    try{
+        await client.connect();
+
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+
+        // Deletar o livro no banco de Dados
+        const result = await collection.deleteOne({_id: new ObjectId(id)});
+
+        if(result.deletedCount > 0){
+            console.log(`Livro com ID:${id} deletado com sucesso.`)
+            res.redirect('/'); // Redirecionar para a página inicial após a exclusão
+        } else{
+            res.status(404).send('Livro não encontrado');
+        }
+    } catch(err){
+        console.error('Erro ao deletar o livro: ',err);
+        res.status(500).send('Erro ao deletar o livro. Por favor, tente novamente mais tarde.');
+    } finally{
+        client.close();
+
+    }
+});
+
+// Rota para obter dados todos os livros
+app.get('/livros', async(req,res) => {
+    const client = new MongoClient(url);
+
+    try{
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+
+        const livros = await collection.find({}, {projection: {_id: 1, titulo: 1, autor: 1, editora: 1}}).toArray();
+
+        res.json(livros);
+    } catch(err){
+        console.error('Erro ao buscar livros: ', err)
+        res.status(500).send('Erro ao buscar livros. Por favor, tente novamente mais tarde.')
+    } finally{
+        client.close();
+    }
+});
+
+// Iniciar servidor
+app.listen(port,()=>{
+    console.log(`Servidor Node.js em execução em http://localhost:${port}`)
+});
